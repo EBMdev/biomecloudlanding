@@ -1,0 +1,77 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const p = t.bot_plans;
+---
+
+<section id="bot-plans" class="relative z-10 py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <div class="inline-flex items-center gap-2 bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 text-sm font-medium px-4 py-1.5 rounded-full mb-4">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.44-4z"/>
+          <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.44-4z"/>
+        </svg>
+        Discord Bot Hosting
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">{p.title}</h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">{p.subtitle}</p>
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-6 mb-10">
+      {p.plans.map((plan, i) => (
+        <div class={`reveal reveal-delay-${i + 1} relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 ${plan.highlight ? 'ring-2 ring-indigo-500 shadow-2xl shadow-indigo-500/20' : ''}`}>
+          {plan.highlight && (
+            <div class="absolute -inset-px bg-gradient-to-b from-indigo-600/20 to-transparent rounded-2xl pointer-events-none"></div>
+          )}
+          <div class={`relative p-7 h-full flex flex-col ${plan.highlight ? 'bg-bg-800/90' : 'bg-bg-800/40 border border-white/5'} rounded-2xl`}>
+            {plan.badge && (
+              <div class="absolute -top-px left-1/2 -translate-x-1/2">
+                <span class="bg-indigo-600 text-white text-xs font-bold px-4 py-1 rounded-b-xl shadow-lg block whitespace-nowrap">
+                  {plan.badge}
+                </span>
+              </div>
+            )}
+
+            <div class="mt-2 mb-6">
+              <div class="text-xl font-bold text-white mb-2">{plan.name}</div>
+              <div class="flex items-baseline gap-1 mb-1">
+                <span class="text-gray-400 text-lg">$</span>
+                <span class="text-5xl font-black text-white">{plan.price}</span>
+                <span class="text-gray-500 text-sm">{p.month}</span>
+              </div>
+              <div class="text-sm font-medium text-indigo-400">{plan.ram}</div>
+            </div>
+
+            <a
+              href="#"
+              class={`mt-auto w-full text-center font-semibold py-3 px-4 rounded-xl transition-all duration-200 ${plan.highlight
+                ? 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/25'
+                : 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white'
+              }`}
+            >
+              {plan.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Common features -->
+    <div class="reveal bg-bg-800/30 border border-white/5 rounded-2xl p-6">
+      <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider text-center mb-4">{p.features_header}</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {p.common_features.map(f => (
+          <div class="flex items-center gap-2 text-gray-300 text-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#818CF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            {f}
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

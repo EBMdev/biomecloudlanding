@@ -1,0 +1,238 @@
+export const en = {
+  nav: {
+    minecraft: 'Minecraft Hosting',
+    discord: 'Discord Bot Hosting',
+    pricing: 'Pricing',
+    docs: 'Docs',
+    status: 'Status',
+    login: 'Log in',
+    cta: 'Get Started',
+  },
+  hero: {
+    badge: 'Premium Minecraft & Discord Hosting',
+    headline: 'Power Your Community Without Limits',
+    subheadline: 'High-performance Minecraft servers and Discord bot hosting built on enterprise-grade infrastructure.',
+    cta_primary: 'Deploy Minecraft Server',
+    cta_secondary: 'Host Your Discord Bot',
+    dashboard: {
+      title: 'Server Dashboard',
+      mc_status: 'Minecraft Server',
+      mc_players: 'Online Players',
+      cpu: 'CPU Usage',
+      ram: 'RAM Usage',
+      bot_uptime: 'Bot Uptime',
+      connections: 'Active Connections',
+      online: 'Online',
+      running: 'Running',
+    },
+  },
+  stats: {
+    uptime: { value: '99.99%', label: 'Guaranteed Uptime' },
+    setup: { value: '< 60s', label: 'Instant Setup' },
+    support: { value: '24/7', label: 'Expert Support' },
+    nodes: { value: '3', label: 'Global Regions' },
+  },
+  services: {
+    title: 'What We Host',
+    subtitle: 'Two products, zero compromises. Built for communities that demand the best.',
+    minecraft: {
+      title: 'Minecraft Hosting',
+      description: 'Launch your Minecraft server in under a minute. Ryzen-powered hardware with NVMe SSD storage and enterprise DDoS protection.',
+      badge: 'Most Popular',
+      features: [
+        'Ryzen-Powered CPUs',
+        'NVMe SSD Storage',
+        'DDoS Protection',
+        'Instant Setup',
+        'Full FTP Access',
+        'One-click Modpacks',
+        'Automatic Backups',
+      ],
+      cta: 'Deploy Now',
+    },
+    discord: {
+      title: 'Discord Bot Hosting',
+      description: 'Keep your bot online around the clock. Supports Node.js, Python, Java and more with built-in monitoring.',
+      features: [
+        '24/7 Uptime Guarantee',
+        'Node.js Support',
+        'Python Support',
+        'Java Support',
+        'Automatic Restart',
+        'Monitoring Dashboard',
+        'Custom Startup Commands',
+      ],
+      cta: 'Host Your Bot',
+    },
+  },
+  mc_plans: {
+    title: 'Minecraft Hosting Plans',
+    subtitle: 'Transparent pricing. No hidden fees. Scale up anytime.',
+    month: '/mo',
+    plans: [
+      {
+        name: 'Starter',
+        price: '4',
+        ram: '2GB RAM',
+        badge: null,
+        features: ['2GB DDR5 RAM', 'Ryzen CPU', 'NVMe SSD', 'DDoS Protection', 'Instant Setup', 'Basic Support'],
+        cta: 'Get Started',
+        highlight: false,
+      },
+      {
+        name: 'Advanced',
+        price: '10',
+        ram: '6GB RAM',
+        badge: 'Most Popular',
+        features: ['6GB DDR5 RAM', 'Ryzen CPU', 'NVMe SSD', 'DDoS Protection', 'Priority Resources', 'Full FTP Access', 'Modpack Support', '24/7 Support'],
+        cta: 'Deploy Now',
+        highlight: true,
+      },
+      {
+        name: 'Extreme',
+        price: '19',
+        ram: '12GB RAM',
+        badge: null,
+        features: ['12GB DDR5 RAM', 'Ryzen CPU', 'NVMe SSD', 'DDoS Protection', 'Premium Performance', 'Full FTP Access', 'Modpack Support', 'Priority Support'],
+        cta: 'Get Maximum Power',
+        highlight: false,
+      },
+    ],
+  },
+  bot_plans: {
+    title: 'Discord Bot Plans',
+    subtitle: 'Always-on hosting for bots of every size.',
+    month: '/mo',
+    features_header: 'Every plan includes',
+    common_features: ['Auto Restart', 'Uptime Monitoring', 'Custom Startup Commands', '24/7 Availability'],
+    plans: [
+      { name: 'Basic', price: '2', ram: '512MB RAM', highlight: false, cta: 'Start Free' },
+      { name: 'Growth', price: '5', ram: '2GB RAM', highlight: true, badge: 'Best Value', cta: 'Get Growth' },
+      { name: 'Professional', price: '9', ram: '4GB RAM', highlight: false, cta: 'Go Pro' },
+    ],
+  },
+  features: {
+    title: 'Infrastructure Built Different',
+    subtitle: 'Every technical decision made for performance, reliability, and developer experience.',
+    items: [
+      { title: 'Lightning Fast Hardware', description: 'Latest AMD Ryzen processors with DDR5 memory. Your server starts in seconds, not minutes.' },
+      { title: 'Enterprise DDoS Protection', description: 'Always-on mitigation with no bandwidth cap. Your community stays online even under attack.' },
+      { title: 'Instant Deployment', description: 'From payment to a running server in under 60 seconds. Pre-configured templates for every use case.' },
+      { title: 'Modern Control Panel', description: 'A dashboard that makes sense. Manage files, monitor performance, and restart with one click.' },
+      { title: 'Automated Backups', description: 'Daily backups retained for 7 days. Restore your world to any point with a single click.' },
+      { title: 'Expert Support', description: '24/7 human support via Discord. Real engineers, not bots. Average response under 5 minutes.' },
+    ],
+  },
+  infrastructure: {
+    title: 'Global Infrastructure',
+    subtitle: 'Strategically placed nodes for minimal latency wherever your community is.',
+    regions: [
+      { name: 'Europe', location: 'Frankfurt, Germany', ping: '< 5ms avg' },
+      { name: 'North America', location: 'New York, USA', ping: '< 8ms avg' },
+      { name: 'Asia-Pacific', location: 'Singapore', ping: '< 10ms avg' },
+    ],
+  },
+  comparison: {
+    title: 'Why BiomeCloud?',
+    subtitle: 'We built the hosting we always wanted. Here is how it stacks up.',
+    biomecloud: 'BiomeCloud',
+    traditional: 'Traditional Hosting',
+    rows: [
+      { label: 'Setup Time', biome: '< 60 seconds', trad: '10–30 minutes' },
+      { label: 'Hardware', biome: 'AMD Ryzen + DDR5', trad: 'Generic shared VPS' },
+      { label: 'Dashboard', biome: 'Modern, real-time', trad: 'Legacy panel' },
+      { label: 'DDoS Protection', biome: 'Included, always-on', trad: 'Add-on or absent' },
+      { label: 'Support', biome: '24/7 < 5 min response', trad: 'Business hours only' },
+      { label: 'Pricing', biome: 'Transparent, flat-rate', trad: 'Hidden fees' },
+    ],
+  },
+  testimonials: {
+    title: 'Trusted by Communities',
+    subtitle: 'Real words from real server owners and bot developers.',
+    items: [
+      {
+        quote: 'Migrated from a legacy provider and the difference is night and day. My 200-player server runs smoother than ever with zero lag spikes.',
+        name: 'Alex R.',
+        role: 'Minecraft Network Owner',
+        avatar: 'AR',
+      },
+      {
+        quote: 'My Discord bot has been online for 4 months straight without a single interruption. The monitoring dashboard is exactly what I needed.',
+        name: 'Maya K.',
+        role: 'Discord Bot Developer',
+        avatar: 'MK',
+      },
+      {
+        quote: 'The setup took literally 45 seconds. I set up modpacks for our community in under 10 minutes. Genuinely the best hosting decision I have made.',
+        name: 'Carlos V.',
+        role: 'Gaming Community Admin',
+        avatar: 'CV',
+      },
+    ],
+  },
+  faq: {
+    title: 'Frequently Asked Questions',
+    subtitle: 'Everything you need to know before you deploy.',
+    items: [
+      {
+        q: 'How fast is server setup?',
+        a: 'Your server is provisioned automatically in under 60 seconds after payment. No manual activation, no waiting for a human to flip a switch.',
+      },
+      {
+        q: 'Which Minecraft versions and modpacks do you support?',
+        a: 'We support every Minecraft version from 1.7 to the latest release, including all major loaders: Vanilla, Paper, Spigot, Forge, Fabric, and NeoForge. One-click modpack installation is available for over 1,000 CurseForge packs.',
+      },
+      {
+        q: 'Are DDoS attacks covered?',
+        a: 'Yes. DDoS mitigation is included on every plan at no extra cost. Our network absorbs and filters attacks automatically so your players stay online.',
+      },
+      {
+        q: 'What languages does bot hosting support?',
+        a: 'Node.js, Python, and Java are fully supported out of the box. You can also use custom startup commands to run any runtime your bot requires.',
+      },
+      {
+        q: 'How do backups work?',
+        a: 'Automatic daily backups are included on all plans and retained for 7 days. You can also trigger a manual backup at any time from the dashboard and restore with a single click.',
+      },
+      {
+        q: 'What are your billing terms?',
+        a: 'Monthly billing with no contracts. You can cancel anytime from your dashboard. We do not charge setup fees or hidden costs — the price you see is what you pay.',
+      },
+    ],
+  },
+  vps: {
+    badge: 'Coming Soon',
+    title: 'VPS Infrastructure Launching Soon',
+    subtitle: 'Dedicated cloud VPS with root access and hourly billing. Join the waitlist.',
+    cta: 'Join Waitlist',
+  },
+  cta: {
+    title: 'Ready to Launch Your Next Community?',
+    subtitle: 'Join thousands of server owners and bot developers who chose performance.',
+    mc: 'Deploy Minecraft Server',
+    bot: 'Host Your Discord Bot',
+  },
+  footer: {
+    tagline: 'Enterprise-grade cloud hosting for the communities that never sleep.',
+    company: {
+      title: 'Company',
+      links: ['About', 'Contact', 'Careers'],
+    },
+    services: {
+      title: 'Services',
+      links: ['Minecraft Hosting', 'Discord Bot Hosting'],
+    },
+    resources: {
+      title: 'Resources',
+      links: ['Documentation', 'Status', 'API'],
+    },
+    legal: {
+      title: 'Legal',
+      links: ['Privacy Policy', 'Terms of Service'],
+    },
+    lang: 'Language',
+    copyright: '© 2026 BiomeCloud. All rights reserved.',
+  },
+};
+
+export type Translations = typeof en;

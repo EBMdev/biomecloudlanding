@@ -1,0 +1,81 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const p = t.mc_plans;
+---
+
+<section id="mc-plans" class="relative z-10 py-24">
+  <!-- Section bg glow -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-900/10 rounded-full blur-[120px]"></div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    <div class="text-center mb-16 reveal">
+      <div class="inline-flex items-center gap-2 bg-blue-600/10 border border-blue-500/20 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-4">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+        </svg>
+        Minecraft Hosting
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">{p.title}</h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">{p.subtitle}</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 items-stretch">
+      {p.plans.map((plan, i) => (
+        <div class={`reveal reveal-delay-${i + 1} relative flex flex-col rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 ${plan.highlight ? 'ring-2 ring-blue-500 shadow-2xl shadow-blue-500/20' : ''}`}>
+          {plan.highlight && (
+            <div class="absolute -inset-px bg-gradient-to-b from-blue-600/30 to-transparent rounded-2xl pointer-events-none"></div>
+          )}
+
+          <div class={`relative flex flex-col h-full p-7 ${plan.highlight ? 'bg-bg-800/90' : 'bg-bg-800/40 border border-white/5'} rounded-2xl`}>
+            {plan.badge && (
+              <div class="absolute -top-px left-1/2 -translate-x-1/2">
+                <span class="bg-blue-600 text-white text-xs font-bold px-4 py-1 rounded-b-xl shadow-lg shadow-blue-600/30 block whitespace-nowrap">
+                  {plan.badge}
+                </span>
+              </div>
+            )}
+
+            <div class="mb-6 mt-2">
+              <div class="flex items-baseline gap-1 mb-1">
+                <span class="text-gray-400 text-lg">$</span>
+                <span class="text-5xl font-black text-white">{plan.price}</span>
+                <span class="text-gray-500 text-sm">{p.month}</span>
+              </div>
+              <div class="text-sm font-medium text-blue-400">{plan.ram}</div>
+              <div class="text-xl font-bold text-white mt-3">{plan.name}</div>
+            </div>
+
+            <!-- Divider -->
+            <div class={`h-px mb-6 ${plan.highlight ? 'bg-blue-600/30' : 'bg-white/5'}`}></div>
+
+            <ul class="space-y-3 flex-1 mb-8">
+              {plan.features.map(f => (
+                <li class="flex items-center gap-3 text-gray-300 text-sm">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke={plan.highlight ? '#60A5FA' : '#6B7280'} stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  {f}
+                </li>
+              ))}
+            </ul>
+
+            <a
+              href="#"
+              class={`w-full text-center font-semibold py-3 px-4 rounded-xl transition-all duration-200 ${plan.highlight
+                ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/25 hover:shadow-blue-500/40'
+                : 'bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 text-white'
+              }`}
+            >
+              {plan.cta}
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

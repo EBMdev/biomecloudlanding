@@ -1,0 +1,57 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const c = t.comparison;
+---
+
+<section class="relative z-10 py-24">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">{c.title}</h2>
+      <p class="text-gray-400 text-lg max-w-xl mx-auto">{c.subtitle}</p>
+    </div>
+
+    <div class="reveal rounded-2xl overflow-hidden border border-white/5">
+      <!-- Table header -->
+      <div class="grid grid-cols-3 bg-bg-800/60">
+        <div class="p-4 sm:p-5 text-sm font-semibold text-gray-500 uppercase tracking-wider"></div>
+        <div class="p-4 sm:p-5 text-center bg-blue-600/10 border-x border-blue-500/10">
+          <div class="flex items-center justify-center gap-2">
+            <div class="w-5 h-5 bg-blue-600 rounded-md flex items-center justify-center">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                <circle cx="12" cy="12" r="3"/>
+                <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+                <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+              </svg>
+            </div>
+            <span class="text-sm font-bold text-white">{c.biomecloud}</span>
+          </div>
+        </div>
+        <div class="p-4 sm:p-5 text-center">
+          <span class="text-sm font-semibold text-gray-500">{c.traditional}</span>
+        </div>
+      </div>
+
+      <!-- Rows -->
+      {c.rows.map((row, i) => (
+        <div class={`grid grid-cols-3 border-t border-white/5 ${i % 2 === 0 ? 'bg-bg-900/20' : 'bg-transparent'} hover:bg-bg-800/30 transition-colors`}>
+          <div class="p-4 sm:p-5 text-sm font-medium text-gray-400">{row.label}</div>
+          <div class="p-4 sm:p-5 text-center bg-blue-600/5 border-x border-blue-500/5">
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-300">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              {row.biome}
+            </span>
+          </div>
+          <div class="p-4 sm:p-5 text-center">
+            <span class="inline-flex items-center gap-1.5 text-sm text-gray-500">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4B5563" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              {row.trad}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

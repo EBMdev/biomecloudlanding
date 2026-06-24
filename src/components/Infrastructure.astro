@@ -1,0 +1,104 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const inf = t.infrastructure;
+
+// Node positions on the SVG map (approximate percentages)
+const nodes = [
+  { x: 51, y: 36, label: inf.regions[0].name, location: inf.regions[0].location, ping: inf.regions[0].ping, active: true },
+  { x: 23, y: 40, label: inf.regions[1].name, location: inf.regions[1].location, ping: inf.regions[1].ping, active: false },
+  { x: 76, y: 48, label: inf.regions[2].name, location: inf.regions[2].location, ping: inf.regions[2].ping, active: false },
+];
+---
+
+<section id="infrastructure" class="relative z-10 py-24 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">{inf.title}</h2>
+      <p class="text-gray-400 text-lg max-w-2xl mx-auto">{inf.subtitle}</p>
+    </div>
+
+    <!-- Map container -->
+    <div class="reveal relative rounded-3xl overflow-hidden border border-white/5 bg-bg-800/30">
+      <!-- Glow overlay -->
+      <div class="absolute inset-0 bg-gradient-to-b from-blue-900/5 via-transparent to-bg-800/50 pointer-events-none z-10"></div>
+
+      <!-- SVG World Map -->
+      <div class="relative w-full" style="padding-bottom: 50%;">
+        <svg
+          class="absolute inset-0 w-full h-full opacity-20"
+          viewBox="0 0 1000 500"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+        >
+          <!-- Simplified world continents -->
+          <!-- North America -->
+          <path d="M80,80 L200,70 L250,100 L260,160 L220,200 L180,220 L150,260 L120,270 L100,240 L80,200 L60,160 Z" fill="#1E40AF" opacity="0.4"/>
+          <!-- South America -->
+          <path d="M160,280 L220,270 L250,300 L240,380 L200,420 L160,400 L140,360 L150,320 Z" fill="#1E40AF" opacity="0.4"/>
+          <!-- Europe -->
+          <path d="M430,60 L510,55 L530,80 L520,120 L490,130 L460,120 L440,100 Z" fill="#1E40AF" opacity="0.4"/>
+          <!-- Africa -->
+          <path d="M450,150 L530,140 L560,180 L550,280 L510,320 L470,310 L440,270 L430,200 Z" fill="#1E40AF" opacity="0.4"/>
+          <!-- Asia -->
+          <path d="M540,50 L750,40 L820,80 L840,140 L800,180 L720,190 L650,170 L590,160 L550,120 Z" fill="#1E40AF" opacity="0.4"/>
+          <!-- Southeast Asia / Australia hint -->
+          <path d="M720,220 L800,210 L820,260 L780,280 L730,260 Z" fill="#1E40AF" opacity="0.3"/>
+          <path d="M760,300 L830,290 L850,340 L800,360 L755,340 Z" fill="#1E40AF" opacity="0.3"/>
+          <!-- Grid lines -->
+          {[100,200,300,400].map(y => (
+            <line x1="0" y1={y} x2="1000" y2={y} stroke="#2563EB" stroke-width="0.5" opacity="0.2"/>
+          ))}
+          {[100,200,300,400,500,600,700,800,900].map(x => (
+            <line x1={x} y1="0" x2={x} y2="500" stroke="#2563EB" stroke-width="0.5" opacity="0.2"/>
+          ))}
+        </svg>
+
+        <!-- Nodes overlaid -->
+        {nodes.map((node, i) => (
+          <div
+            class="absolute z-20 -translate-x-1/2 -translate-y-1/2"
+            style={`left: ${node.x}%; top: ${node.y}%`}
+          >
+            <!-- Ripple -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class={`w-12 h-12 rounded-full border ${node.active ? 'border-blue-500/40' : 'border-blue-600/20'} animate-ping opacity-30`}></div>
+            </div>
+            <!-- Node dot -->
+            <div class={`relative w-4 h-4 rounded-full border-2 cursor-pointer group/node ${node.active ? 'bg-blue-500 border-blue-300 shadow-lg shadow-blue-500/50' : 'bg-blue-700 border-blue-500'}`}>
+              <!-- Tooltip -->
+              <div class="absolute bottom-6 left-1/2 -translate-x-1/2 bg-bg-800 border border-white/10 rounded-xl p-3 w-44 opacity-0 group-hover/node:opacity-100 transition-opacity pointer-events-none shadow-xl z-30">
+                <div class="text-xs font-bold text-white mb-1">{node.label}</div>
+                <div class="text-xs text-gray-400 mb-1">{node.location}</div>
+                <div class="text-xs text-blue-400 font-medium">{node.ping}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+
+        <!-- Connection lines between nodes (SVG overlay) -->
+        <svg class="absolute inset-0 w-full h-full z-10 pointer-events-none" viewBox="0 0 100 50" preserveAspectRatio="none">
+          <line x1="23" y1="40" x2="51" y2="36" stroke="#2563EB" stroke-width="0.3" stroke-dasharray="1,2" opacity="0.5"/>
+          <line x1="51" y1="36" x2="76" y2="48" stroke="#2563EB" stroke-width="0.3" stroke-dasharray="1,2" opacity="0.5"/>
+          <line x1="23" y1="40" x2="76" y2="48" stroke="#2563EB" stroke-width="0.15" stroke-dasharray="1,3" opacity="0.3"/>
+        </svg>
+      </div>
+
+      <!-- Region cards below map -->
+      <div class="grid sm:grid-cols-3 gap-4 p-6 border-t border-white/5">
+        {nodes.map((node, i) => (
+          <div class={`flex items-center gap-4 p-4 rounded-xl ${node.active ? 'bg-blue-600/10 border border-blue-500/20' : 'bg-bg-900/40 border border-white/5'}`}>
+            <div class={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${node.active ? 'bg-blue-400 shadow-sm shadow-blue-400' : 'bg-blue-700'} animate-pulse`}></div>
+            <div>
+              <div class="text-sm font-semibold text-white">{node.label}</div>
+              <div class="text-xs text-gray-500">{node.location}</div>
+              <div class={`text-xs font-medium mt-0.5 ${node.active ? 'text-blue-400' : 'text-gray-600'}`}>{node.ping}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

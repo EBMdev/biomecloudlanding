@@ -1,0 +1,39 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
+import Services from '../components/Services.astro';
+import MCPlans from '../components/MCPlans.astro';
+import BotPlans from '../components/BotPlans.astro';
+import Features from '../components/Features.astro';
+import Infrastructure from '../components/Infrastructure.astro';
+import Comparison from '../components/Comparison.astro';
+import Testimonials from '../components/Testimonials.astro';
+import FAQ from '../components/FAQ.astro';
+import VPSTeaser from '../components/VPSTeaser.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="BiomeCloud — Premium Minecraft & Discord Bot Hosting"
+  description="High-performance Minecraft servers and Discord bot hosting on enterprise-grade AMD Ryzen infrastructure. Deploy in under 60 seconds. 99.99% uptime guaranteed."
+>
+  <Navbar />
+  <main>
+    <Hero />
+    <Stats />
+    <Services />
+    <MCPlans />
+    <BotPlans />
+    <Features />
+    <Infrastructure />
+    <Comparison />
+    <Testimonials />
+    <FAQ />
+    <VPSTeaser />
+    <CTA />
+  </main>
+  <Footer />
+</Layout>

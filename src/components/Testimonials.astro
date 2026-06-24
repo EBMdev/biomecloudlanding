@@ -1,0 +1,52 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const tm = t.testimonials;
+
+const avatarColors = [
+  'from-blue-500 to-blue-700',
+  'from-indigo-500 to-purple-700',
+  'from-cyan-500 to-blue-700',
+];
+---
+
+<section class="relative z-10 py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16 reveal">
+      <h2 class="text-3xl sm:text-4xl font-black text-white mb-4">{tm.title}</h2>
+      <p class="text-gray-400 text-lg max-w-xl mx-auto">{tm.subtitle}</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      {tm.items.map((item, i) => (
+        <div class={`reveal reveal-delay-${i + 1} group relative bg-bg-800/40 hover:bg-bg-800/60 border border-white/5 hover:border-white/10 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1`}>
+          <!-- Quote mark -->
+          <div class="text-5xl font-black text-blue-600/20 leading-none mb-4 select-none group-hover:text-blue-500/30 transition-colors">"</div>
+
+          <p class="text-gray-300 text-sm leading-relaxed mb-6">{item.quote}</p>
+
+          <div class="flex items-center gap-3 pt-4 border-t border-white/5">
+            <!-- Avatar -->
+            <div class={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarColors[i]} flex items-center justify-center flex-shrink-0`}>
+              <span class="text-xs font-bold text-white">{item.avatar}</span>
+            </div>
+            <div>
+              <div class="text-sm font-semibold text-white">{item.name}</div>
+              <div class="text-xs text-gray-500">{item.role}</div>
+            </div>
+            <!-- Stars -->
+            <div class="ml-auto flex gap-0.5">
+              {[...Array(5)].map(() => (
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#FBBF24" stroke="none">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                </svg>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

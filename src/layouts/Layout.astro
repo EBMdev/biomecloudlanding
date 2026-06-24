@@ -1,0 +1,136 @@
+---
+import { getLangFromUrl } from '../i18n';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const lang = getLangFromUrl(Astro.url);
+
+const {
+  title = 'BiomeCloud — Premium Minecraft & Discord Bot Hosting',
+  description = 'High-performance Minecraft servers and Discord bot hosting on enterprise-grade AMD Ryzen infrastructure. Deploy in under 60 seconds. 99.99% uptime guaranteed.',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, 'https://biomecloud.gg').toString();
+const ogImage = 'https://biomecloud.gg/og-image.png';
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="minecraft hosting, discord bot hosting, game hosting, cloud hosting, ryzen hosting, ddos protection, minecraft server" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="BiomeCloud" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="canonical" href={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <title>{title}</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "BiomeCloud",
+        "applicationCategory": "HostingService",
+        "description": "Premium Minecraft and Discord Bot Hosting",
+        "url": "https://biomecloud.gg"
+      }
+    </script>
+  </head>
+  <body class="bg-[#030712] antialiased">
+    <canvas id="particles"></canvas>
+    <slot />
+
+    <script>
+      // Particle system
+      const canvas = document.getElementById('particles') as HTMLCanvasElement;
+      const ctx = canvas.getContext('2d')!;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      interface Particle {
+        x: number; y: number; vx: number; vy: number;
+        size: number; opacity: number; life: number; maxLife: number;
+      }
+
+      const particles: Particle[] = [];
+
+      function createParticle(): Particle {
+        return {
+          x: Math.random() * canvas.width,
+          y: canvas.height + 10,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: -(Math.random() * 0.8 + 0.2),
+          size: Math.random() * 2 + 0.5,
+          opacity: 0,
+          life: 0,
+          maxLife: Math.random() * 300 + 200,
+        };
+      }
+
+      for (let i = 0; i < 30; i++) {
+        const p = createParticle();
+        p.y = Math.random() * canvas.height;
+        p.life = Math.random() * p.maxLife;
+        particles.push(p);
+      }
+
+      function animateParticles() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        if (Math.random() < 0.03 && particles.length < 60) {
+          particles.push(createParticle());
+        }
+
+        for (let i = particles.length - 1; i >= 0; i--) {
+          const p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.life++;
+          const progress = p.life / p.maxLife;
+          p.opacity = Math.sin(progress * Math.PI) * 0.4;
+          if (p.life >= p.maxLife) { particles.splice(i, 1); continue; }
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(96, 165, 250, ${p.opacity})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(animateParticles);
+      }
+      animateParticles();
+
+      // Scroll reveal
+      const observer = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    </script>
+  </body>
+</html>
